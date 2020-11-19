@@ -3,9 +3,6 @@ import requests
 
 api_key ='APY_KEY here'
 
-class Error(Exception):
-    pass
-
 def gmaps(address, data_type = 'json'):
     endpoint = f'https://maps.googleapis.com/maps/api/geocode/{data_type}'
     params = {'address': address, 'key': api_key, 'language': 'de'}
@@ -18,6 +15,6 @@ def gmaps(address, data_type = 'json'):
         results = r.json()['results'][0]['geometry']['location']
         if results is not None:
             return results.get('lat'), results.get('lng')
-        raise Error("No results for '%s'" % address)
+        raise Exception("No results for '%s'" % address)
     except:
         pass
